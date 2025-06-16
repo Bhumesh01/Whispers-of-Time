@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# environment variables
+.env
+
+# logs
+logs/
+*.log
+npm-debug.log*
+
+# output folders (if using Babel/TS later)
+dist/
+build/
+
+# IDE/editor
+.vscode/
+.idea/
+.DS_Store
