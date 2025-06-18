@@ -1,1 +1,13 @@
 @import "tailwindcss";
+@theme {
+  --font-display: "sans-serif", "Times New Roman", serif;
+  --font-body: "sans-serif", "Arial", sans-serif;
+  --color-background: #030A1C;
+  --color-text: #F0F0F0;
+  --color-posts: rgba(17, 36, 74, 0.2);
+  --color-posts-hover: rgba(17, 36, 74, 0.5);
+  --color-posts-border:  #3A86FF; 
+  --color-post: rgba(5, 16, 36, 0.5);
+  --color-form: rgba(6, 24, 49, 0.5);
+  --color-form-hover: rgba(6, 24, 49, 0.9);
+}
