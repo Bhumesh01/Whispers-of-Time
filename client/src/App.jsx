@@ -14,7 +14,7 @@ function App() {
         <div className='sm:col-span-2 col-span-3 text-text m-1 p-2 font-medium bg-posts rounded-2xl border border-posts-border hover:bg-posts-hover'>
           <Posts></Posts>
         </div>
-        <div className='sm:col-span-1 col-span-3 text-text m-1 p-2 font-medium bg-form rounded-2xl  border border-posts-border hover:bg-form-hover'>
+        <div className='sm:col-span-1 col-span-3 text-text m-1 p-2 font-medium bg-form rounded-2xl  border border-posts-border hover:bg-form-hover sm:mt-auto sm:mb-auto'>
           <Form></Form>
         </div>
       </div>

@@ -1,10 +1,31 @@
-import Post from "./Post/post.jsx"
-export default function Posts(){
-    return(
-        <>
-            <Post ></Post>
-            <Post></Post>
-            <Post></Post>
-        </>
-    )
+import { useEffect } from "react";
+import Post from "./Post/post.jsx";
+import { postsAtom } from "../../state/atoms/atoms.js";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { fetchPosts } from "../../api/index.js";
+
+export default function Posts() {
+    const posts = useRecoilValue(postsAtom);
+    const setPosts = useSetRecoilState(postsAtom);
+
+    useEffect(() => {
+        fetchPosts().then(data => {
+            // Adjust according to your API response structure
+            setPosts(data.messages || data);
+        });
+    }, [setPosts]);
+
+    return (
+        <div className="flex flex-wrap justify-center items-center gap-4 p-2 min-h-[300px]">
+            {!posts.length ? (
+                <div className="text-white text-lg font-semibold">Loading...</div>
+            ) : (
+                posts.map((post) => (
+                    <div key={post._id} className="w-full sm:w-[384px] md:w-1/3 flex justify-center">
+                        <Post post={post} />
+                    </div>
+                ))
+            )}
+        </div>
+    );
 }
