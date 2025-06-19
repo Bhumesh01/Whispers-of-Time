@@ -38,7 +38,7 @@ export default function Form() {
             creator: creatorRef.current.value,
             title: titleRef.current.value,
             message: messageRef.current.value,
-            tags: tagRef.current.value,
+            tags: tagRef.current.value.split(" "),
             selectedFile: fileBase64,
         };
 
