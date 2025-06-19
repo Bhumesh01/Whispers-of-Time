@@ -11,10 +11,10 @@ function App() {
         <h1 className='absolute inset-0 top-'>WHISPERS OF TIME</h1>
       </div>
       <div className='grid grid-cols-3 gap-2'>
-        <div className='sm:col-span-2 col-span-3 text-text m-auto p-2 font-medium bg-posts rounded-2xl border border-posts-border hover:bg-posts-hover'>
+        <div className='sm:col-span-2 col-span-3 text-text m-1 p-2 font-medium bg-posts rounded-2xl border border-posts-border hover:bg-posts-hover'>
           <Posts></Posts>
         </div>
-        <div className='sm:col-span-1 col-span-3 text-text m-auto p-2 font-medium bg-form rounded-2xl  border border-posts-border hover:bg-form-hover'>
+        <div className='sm:col-span-1 col-span-3 text-text m-1 p-2 font-medium bg-form rounded-2xl  border border-posts-border hover:bg-form-hover'>
           <Form></Form>
         </div>
       </div>

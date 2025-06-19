@@ -5,11 +5,11 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
 const app = express();
-app.use('/posts', postRoutes);
-
 app.use(cors());
+
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
+app.use('/posts', postRoutes);
 
 const CONNECTION_URL = "mongodb+srv://bhumesh01:YLBq3bRCoNvajxpa@mycluster.jta6k4p.mongodb.net/";
 const PORT = process.env.PORT || 5000;

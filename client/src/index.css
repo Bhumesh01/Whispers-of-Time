@@ -10,4 +10,6 @@
   --color-post: rgba(5, 16, 36, 0.5);
   --color-form: rgba(6, 24, 49, 0.5);
   --color-form-hover: rgba(6, 24, 49, 0.9);
+  --color-button: #3A86FF;
+  --color-button-hover: #2A5BB8;
 }
