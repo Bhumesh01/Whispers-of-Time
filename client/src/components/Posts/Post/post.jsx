@@ -6,6 +6,7 @@ export default function Post({ post }) {
             <div className="flex items-center justify-between mb-2">
                 <h1 className="text-lg font-bold text-white">{post.creator}</h1>
                 <h5 className="text-xs text-gray-400">{moment(post.createdAt).fromNow()}</h5>
+                <button className="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded-full font-bold text-lg shadow transition-colors duration-150 p-2">...</button>
             </div>
             {post.selectedFile && (
                 <div className="mb-2">
@@ -13,7 +14,7 @@ export default function Post({ post }) {
                 </div>
             )}
             <div className="flex flex-wrap gap-2 mb-2">
-                {post.tags && post.tags.map((tag, idx) => (
+                {post.tags.map((tag, idx) => (
                     <span key={idx} className="bg-cyan-700 text-white text-xs px-2 py-1 rounded-full">#{tag}</span>
                 ))}
             </div>

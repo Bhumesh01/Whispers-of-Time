@@ -7,7 +7,7 @@ function App() {
   return (
     <div className='bg-background h-screen'>
       <div className='text-text text-3xl text-center font-medium m-5 rounded-2xl shadow-md shadow-[#BFC9D9] relative w-[90%] h-20'>
-        <img className='w-full h-20 object-cover' src='../src/assets/bgImg.jpg'/>
+        <img className='w-full h-20 object-cover' src='../src/assets/bgImg.svg'/>
         <h1 className='absolute inset-0 top-'>WHISPERS OF TIME</h1>
       </div>
       <div className='grid grid-cols-3 gap-2'>
