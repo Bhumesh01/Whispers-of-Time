@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:5000/posts';
+const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 export const fetchPosts = async() =>{
     try {
         const response = await axios.get(url);
