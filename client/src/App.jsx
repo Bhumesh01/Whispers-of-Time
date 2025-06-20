@@ -1,11 +1,12 @@
 import Posts from './components/Posts/posts.jsx'
 import Form from './components/Form/from.jsx'
+import bgImg from './assets/bgImg.svg';
 function App() {
 
   return (
     <div className='bg-background h-screen p-4 m-2'>
       <div className='text-text text-3xl text-center font-medium m-5 rounded-2xl shadow-md shadow-[#BFC9D9] relative w-[90%] h-20'>
-        <img loading='lazy' className='w-full h-20 object-cover rounded-2xl' src='../src/assets/bgImg.svg'/>
+        <img loading='lazy' className='w-full h-20 object-cover rounded-2xl' src={bgImg}/>
         <h1 className='absolute inset-0 top-5'>WHISPERS OF TIME</h1>
       </div>
       <div className='flex md1:flex-row flex-col-reverse gap-5 justify-around'>
