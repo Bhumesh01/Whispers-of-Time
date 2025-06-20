@@ -16,7 +16,7 @@ export default function Posts() {
     }, [setPosts]);
 
     return (
-        <div className="flex flex-wrap justify-center items-center gap-8 p-2 min-h-[300px] ">
+        <div className="flex flex-wrap justify-center items-center gap-8 p-2 min-h-[300px] text-text sm:m-2 font-medium bg-posts rounded-2xl border border-posts-border hover:bg-posts-hover  ">
             {!posts.length ? (
                 <div className="text-white text-lg font-semibold">Loading...</div>
             ) : (

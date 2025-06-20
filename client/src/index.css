@@ -12,4 +12,5 @@
   --color-form-hover: rgba(6, 24, 49, 0.9);
   --color-button: #3A86FF;
   --color-button-hover: #2A5BB8;
+  --breakpoint-md1: 830px;
 }

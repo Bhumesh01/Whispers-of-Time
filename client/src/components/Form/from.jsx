@@ -92,7 +92,7 @@ export default function Form() {
     }
 
     return (
-        <div className="max-w-md mx-auto bg-form p-6 rounded-2xl shadow-lg">
+        <div className="max-w-xs mx-auto bg-form p-6 rounded-2xl shadow-lg">
             <h1 className="text-2xl font-bold text-center mb-6 text-text">Post a Memory</h1>
             <form className="space-y-4" onSubmit={SubmitData}>
                 <input ref={creatorRef} className="w-full rounded-lg p-2 bg-background text-text placeholder-gray-400" type='text' placeholder='Creator' />
