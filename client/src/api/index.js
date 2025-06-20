@@ -22,3 +22,8 @@ export const updatePost = async(id, postData)=>{
       console.log(response.data);
     return response.data;
 }
+export const deletePost = async(id)=>{
+    const response = await axios.delete(`${url}/${id}`);
+    console.log(response.data);
+    return response.data;
+}

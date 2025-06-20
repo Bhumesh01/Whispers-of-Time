@@ -1,10 +1,17 @@
 import moment from 'moment';
-import { currentIdAtom } from '../../../state/atoms/atoms.js';
+import { currentIdAtom, postsAtom } from '../../../state/atoms/atoms.js';
 import { useSetRecoilState } from 'recoil';
+import {deletePost} from '../../../api/index.js';
 export default function Post({ post }) {
     const setCurrentId = useSetRecoilState(currentIdAtom);
+    const setPosts = useSetRecoilState(postsAtom);
     function update(){
         setCurrentId(post._id);
+    }
+    async function remove(){
+        await deletePost(post._id);
+        setPosts((prevPosts) => prevPosts.filter(p => p._id !== post._id));
+        setCurrentId(null);
     }
     return (
         <div className="bg-[#11224A] rounded-xl shadow-lg p-6 flex flex-col gap-4 w-100 h-[500px] mx-auto">
@@ -27,7 +34,7 @@ export default function Post({ post }) {
             <p className="text-gray-200 mb-2 overflow-ellipsis">{post.message}</p>
             <div className="flex justify-between items-center mt-auto">
                 <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg font-semibold shadow">Like {post.LikeCount ?? 0}</button>
-                <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-lg font-semibold shadow">Delete</button>
+                <button onClick={remove} className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-lg font-semibold shadow">Delete</button>
             </div>
         </div>
     );
