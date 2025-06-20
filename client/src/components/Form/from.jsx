@@ -57,37 +57,41 @@ export default function Form() {
             tags: tagRef.current.value.split(","),
             selectedFile: fileBase64,
         };
-        // For updating the Posts
-        if(currentId){
-            const response = await updatePost(currentId, postData);
-            if (response) {
-                const newPosts = await fetchPosts();
-                setPosts(newPosts.messages);
-                setCurrentId(null);
-                creatorRef.current.value = "";
-                titleRef.current.value = "";
-                messageRef.current.value = "";
-                tagRef.current.value = "";
-                setFileBase64("");
-            } else {
-                alert("Failed to update the memory. Please try again.");
+        try {
+            if(currentId){
+                const response = await updatePost(currentId, postData);
+                if (response) {
+                    const newPosts = await fetchPosts();
+                    alert("Successfully updated the memory.");
+                    setPosts(newPosts.messages);
+                    setCurrentId(null);
+                    creatorRef.current.value = "";
+                    titleRef.current.value = "";
+                    messageRef.current.value = "";
+                    tagRef.current.value = "";
+                    setFileBase64("");
+                } else {
+                    alert("Failed to update the memory. Please try again.");
+                }
             }
-        }
-        else{
-        // For creating the Posts 
-        const response = await createPost(postData);
-        if (response) {
-            alert("Memory created successfully!");
-            const newPosts = await fetchPosts();
-            setPosts(newPosts.messages);
-            creatorRef.current.value = "";
-            titleRef.current.value = "";
-            messageRef.current.value = "";
-            tagRef.current.value = "";
-            setFileBase64("");
-        } else {
-            alert("Failed to create memory. Please try again.");
-        }
+            else{
+                const response = await createPost(postData);
+                if (response) {
+                    alert("Memory created successfully!");
+                    const newPosts = await fetchPosts();
+                    setPosts(newPosts.messages);
+                    creatorRef.current.value = "";
+                    titleRef.current.value = "";
+                    messageRef.current.value = "";
+                    tagRef.current.value = "";
+                    setFileBase64("");
+                } else {
+                    alert("Failed to create memory. Please try again.");
+                }
+            }
+        } catch (error) {
+            alert("An error occurred. Please try again.");
+            console.error(error);
         }
     }
 

@@ -11,11 +11,11 @@ function App() {
         <h1 className='absolute inset-0 top-5'>WHISPERS OF TIME</h1>
       </div>
       <div className='flex md1:flex-row flex-col-reverse gap-5 justify-around'>
-        <div className='md:flex-2/3 m-5'>
+        <div className='sm:flex-2/3 m-5'>
           <Posts></Posts> 
         </div>
-        <div className='md:flex-1/3 p-2'>
-          <div className=' text-text font-medium bg-form rounded-2xl  border border-posts-border hover:bg-form-hover p-3 ml-auto mr-auto'>
+        <div className='sm:flex-1/3 p-2 mt-5'>
+          <div className=' text-text font-medium bg-form rounded-2xl  border border-posts-border hover:bg-form-hover p-3'>
             <Form></Form>
           </div>
         </div>

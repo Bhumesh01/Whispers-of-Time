@@ -10,7 +10,6 @@ export default function Posts() {
 
     useEffect(() => {
         fetchPosts().then(data => {
-            // Adjust according to your API response structure
             setPosts(data.messages || data);
         });
     }, [setPosts]);

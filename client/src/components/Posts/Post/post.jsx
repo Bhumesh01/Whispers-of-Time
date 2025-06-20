@@ -6,17 +6,28 @@ export default function Post({ post }) {
     const setCurrentId = useSetRecoilState(currentIdAtom);
     const setPosts = useSetRecoilState(postsAtom);
     function update(){
+        alert("You can update the Memory");
         setCurrentId(post._id);
     }
     async function remove(){
-        await deletePost(post._id);
-        setPosts((prevPosts) => prevPosts.filter(p => p._id !== post._id));
-        setCurrentId(null);
+        try {
+            await deletePost(post._id);
+            setPosts((prevPosts) => prevPosts.filter(p => p._id !== post._id));
+            setCurrentId(null);
+        } catch (error) {
+            alert("Failed to delete post. Please try again.");
+            console.error(error);
+        }
     }
     async function increaseLike(){
-        await likePost(post._id);
-        setPosts((prevPosts)=>prevPosts.map(p=> p._id === post._id ? {...p, LikeCount: (p.LikeCount || 0) + 1} : p));
-        setCurrentId(null);
+        try {
+            await likePost(post._id);
+            setPosts((prevPosts)=>prevPosts.map(p=> p._id === post._id ? {...p, LikeCount: (p.LikeCount || 0) + 1} : p));
+            setCurrentId(null);
+        } catch (error) {
+            alert("Failed to like post. Please try again.");
+            console.error(error);
+        }
     }
     return (
         <div className="bg-[#11224A] rounded-xl shadow-lg p-6 flex flex-col gap-4 w-100 h-[500px] mx-auto">
