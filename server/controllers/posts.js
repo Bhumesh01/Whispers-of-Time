@@ -26,11 +26,16 @@ export const updatePost = async (req, res) =>{
     if(!mongoose.Types.ObjectId.isValid(_id)){
         return res.status(404).send("No post with that id");
     }
-    const post = req.body;
-    console.log(req.body);
-    const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, {new: true});
-    console.log(updatedPost);
-    res.json(updatedPost);
+    try{
+        const post = req.body;
+        console.log(req.body);
+        const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, {new: true});
+        console.log(updatedPost);
+        res.json(updatedPost);
+    }
+    catch(error){
+        res.status(500).json({error: error.message});
+    }
 }
 export const deletePost = async (req, res) =>{
     console.log(req.params);
@@ -38,15 +43,28 @@ export const deletePost = async (req, res) =>{
     if(!mongoose.Types.ObjectId.isValid(_id)){
         return res.status(404).send("No post with that id");
     }
-    await PostMessage.findByIdAndDelete(_id);
-    res.json({message: "Post deleted successfully"});
+    try{
+        await PostMessage.findByIdAndDelete(_id);
+        res.json({message: "Post deleted successfully"});
+    }
+    catch(error){
+        res.status(500).json({error: error.message});
+    }
 }
-export const likePost= async(req, res)=>{
-    const {id: _id} = req.params;
-    if(!mongoose.Types.ObjectId.isValid(_id)){
+export const likePost = async (req, res) => {
+    const { id: _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(404).send("No post with that id");
     }
-    const post = await PostMessage.findById(_id);
-    const updatedPost = await PostMessage.findByIdAndUpdate(_id, {LikeCount: post.LikeCount + 1}, {new: true});
-    res.json(updatedPost);
+    try {
+        const post = await PostMessage.findById(_id);
+        const updatedPost = await PostMessage.findByIdAndUpdate(
+            _id,
+            { LikeCount: post.LikeCount + 1 },
+            { new: true }
+        );
+        res.json(updatedPost);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 }
