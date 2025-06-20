@@ -27,3 +27,8 @@ export const deletePost = async(id)=>{
     console.log(response.data);
     return response.data;
 }
+export const likePost = async(id)=>{
+    const response = await axios.patch(`${url}/${id}/likePost`);
+    console.log(response.data);
+    return response.data;
+}

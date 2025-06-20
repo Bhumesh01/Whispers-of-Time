@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { currentIdAtom, postsAtom } from '../../../state/atoms/atoms.js';
 import { useSetRecoilState } from 'recoil';
-import {deletePost} from '../../../api/index.js';
+import {deletePost, likePost} from '../../../api/index.js';
 export default function Post({ post }) {
     const setCurrentId = useSetRecoilState(currentIdAtom);
     const setPosts = useSetRecoilState(postsAtom);
@@ -11,6 +11,11 @@ export default function Post({ post }) {
     async function remove(){
         await deletePost(post._id);
         setPosts((prevPosts) => prevPosts.filter(p => p._id !== post._id));
+        setCurrentId(null);
+    }
+    async function increaseLike(){
+        await likePost(post._id);
+        setPosts((prevPosts)=>prevPosts.map(p=> p._id === post._id ? {...p, LikeCount: (p.LikeCount || 0) + 1} : p));
         setCurrentId(null);
     }
     return (
@@ -33,7 +38,7 @@ export default function Post({ post }) {
             <h2 className="text-xl font-semibold text-white mb-1">{post.title}</h2>
             <p className="text-gray-200 mb-2 overflow-ellipsis">{post.message}</p>
             <div className="flex justify-between items-center mt-auto">
-                <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg font-semibold shadow">Like {post.LikeCount ?? 0}</button>
+                <button onClick={increaseLike} className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg font-semibold shadow">Like {post.LikeCount ?? 0}</button>
                 <button onClick={remove} className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-lg font-semibold shadow">Delete</button>
             </div>
         </div>
