@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import './App.css'
 import Posts from './components/Posts/posts.jsx'
 import Form from './components/Form/from.jsx'
 function App() {
