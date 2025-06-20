@@ -1,13 +1,28 @@
-import { useRef, useState } from "react";import { createPost, fetchPosts } from "../../api/index.js";
-import { postsAtom } from "../../state/atoms/atoms.js";
-import { useSetRecoilState } from "recoil";
+import { useRef, useState, useEffect } from "react";
+import { createPost, fetchPosts, updatePost } from "../../api/index.js";
+import { postsAtom, currentIdAtom } from "../../state/atoms/atoms.js";
+import { useSetRecoilState, useRecoilState } from "recoil";
 export default function Form() {
-    const setPosts = useSetRecoilState(postsAtom);
+    const [posts, setPosts] = useRecoilState(postsAtom);
+    const [currentId, setCurrentId] = useRecoilState(currentIdAtom);
     const creatorRef = useRef(null);
     const titleRef = useRef(null);
     const messageRef = useRef(null);
     const tagRef = useRef(null);
     const [fileBase64, setFileBase64] = useState("");
+
+    useEffect(() => {
+        if (currentId) {
+            const postToEdit = posts.find(p => p._id === currentId);
+            if (postToEdit) {
+                creatorRef.current.value = postToEdit.creator;
+                titleRef.current.value = postToEdit.title;
+                messageRef.current.value = postToEdit.message;
+                tagRef.current.value = postToEdit.tags.join(",");
+                setFileBase64(postToEdit.selectedFile);
+            }
+        }
+    }, [currentId, posts]);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -24,7 +39,6 @@ export default function Form() {
 
     async function SubmitData(e) {
         e.preventDefault();
-
         if (
             !creatorRef.current.value ||
             !titleRef.current.value ||
@@ -40,15 +54,32 @@ export default function Form() {
             creator: creatorRef.current.value,
             title: titleRef.current.value,
             message: messageRef.current.value,
-            tags: tagRef.current.value.split(" "),
+            tags: tagRef.current.value.split(","),
             selectedFile: fileBase64,
         };
-
+        // For updating the Posts
+        if(currentId){
+            const response = await updatePost(currentId, postData);
+            if (response) {
+                const newPosts = await fetchPosts();
+                setPosts(newPosts.messages);
+                setCurrentId(null);
+                creatorRef.current.value = "";
+                titleRef.current.value = "";
+                messageRef.current.value = "";
+                tagRef.current.value = "";
+                setFileBase64("");
+            } else {
+                alert("Failed to update the memory. Please try again.");
+            }
+        }
+        else{
+        // For creating the Posts 
         const response = await createPost(postData);
         if (response) {
             alert("Memory created successfully!");
             const newPosts = await fetchPosts();
-            setPosts(newPosts);
+            setPosts(newPosts.messages);
             creatorRef.current.value = "";
             titleRef.current.value = "";
             messageRef.current.value = "";
@@ -56,6 +87,7 @@ export default function Form() {
             setFileBase64("");
         } else {
             alert("Failed to create memory. Please try again.");
+        }
         }
     }
 

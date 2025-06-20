@@ -13,3 +13,12 @@ export const createPost = async(postData)=>{
       console.log(response.data);
     return response.data;
 }
+export const updatePost = async(id, postData)=>{
+    const response = await axios.patch(`${url}/${id}`, postData,  {
+        headers: {
+    "Content-Type": "application/json"
+    },
+      });
+      console.log(response.data);
+    return response.data;
+}

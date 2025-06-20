@@ -16,12 +16,12 @@ export default function Posts() {
     }, [setPosts]);
 
     return (
-        <div className="flex flex-wrap justify-center items-center gap-4 p-2 min-h-[300px]">
+        <div className="flex flex-wrap justify-center items-center gap-8 p-2 min-h-[300px] ">
             {!posts.length ? (
                 <div className="text-white text-lg font-semibold">Loading...</div>
             ) : (
                 posts.map((post) => (
-                    <div key={post._id} className="w-full sm:w-[384px] md:w-1/3 flex justify-center">
+                    <div key={post._id} className="w-full sm:w-1/2 md:w-1/3 flex justify-center min-w-[300px]">
                         <Post post={post} />
                     </div>
                 ))
